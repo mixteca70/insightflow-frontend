@@ -10,6 +10,8 @@ export interface ScreenerFilter {
   majorShareholderMax?: number;
 }
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 async function fetchScreenerResults(
   _filter: ScreenerFilter
 ): Promise<Array<{
@@ -21,6 +23,11 @@ async function fetchScreenerResults(
   pbr?: number;
   governanceScore?: number;
 }>> {
+  if (BASE) {
+    const res = await fetch(`${BASE}/data/screener.json`);
+    if (!res.ok) throw new Error("스크리너 조회 실패");
+    return res.json();
+  }
   const res = await fetch("/api/screener", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
