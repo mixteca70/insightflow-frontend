@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InsightFlow - KIS API 기반 투자 분석</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="logo">InsightFlow</a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" rx="1"/>
+            <rect x="14" y="3" width="7" height="5" rx="1"/>
+            <rect x="14" y="12" width="7" height="9" rx="1"/>
+            <rect x="3" y="16" width="7" height="5" rx="1"/>
+          </svg>
+          대시보드
+        </a>
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="m16 16-1.9-1.9"/>
+          </svg>
+          스마트 스캐너
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="header">
+        <form class="search-form" id="searchForm">
+          <div class="search-input-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m21 21-4.34-4.34"/>
+              <circle cx="11" cy="11" r="8"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="종목코드 검색 (예: 005930)" class="search-input">
+          </div>
+          <button type="submit" class="btn btn-secondary btn-sm">검색</button>
+        </form>
+        <button class="btn btn-icon" id="themeToggle" title="테마 전환">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2"/>
+            <path d="M12 20v2"/>
+            <path d="m4.93 4.93 1.41 1.41"/>
+            <path d="m17.66 17.66 1.41 1.41"/>
+            <path d="M2 12h2"/>
+            <path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/>
+            <path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/>
+          </svg>
+        </button>
+      </header>
+
+      <main class="main">
+        <div class="page-header">
+          <h1 class="page-title">메인 인사이트 대시보드</h1>
+          <p class="page-subtitle">시장의 맥락을 한눈에 파악하세요</p>
+        </div>
+
+        <section class="card" id="themeHeatmapCard">
+          <div class="card-header">
+            <h2 class="card-title">테마 히트맵</h2>
+            <p class="card-desc">업종/테마별 등락률 (색상: 상승 빨강, 하락 파랑)</p>
+          </div>
+          <div class="card-content">
+            <div id="themeHeatmap" class="heatmap-grid"></div>
+            <div id="heatmapError" class="error-state hidden">
+              <p class="error-text">데이터를 불러올 수 없습니다.</p>
+              <button type="button" class="retry-btn" id="retryHeatmap">재시도</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid-2col">
+          <section class="card" id="hotThemesCard">
+            <div class="card-header">
+              <h2 class="card-title">급등 테마 & 주도주</h2>
+              <p class="card-desc">거래대금 상위 테마와 대장주</p>
+            </div>
+            <div class="card-content">
+              <div id="hotThemes" class="theme-list"></div>
+              <div id="hotThemesError" class="error-state hidden">
+                <p class="error-text">데이터를 불러올 수 없습니다.</p>
+                <button type="button" class="retry-btn" id="retryHotThemes">재시도</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="governanceCard">
+            <div class="card-header">
+              <h2 class="card-title">지배구조 이슈 종목</h2>
+              <p class="card-desc">최근 대주주 지분 변동 공시 (DART)</p>
+            </div>
+            <div class="card-content">
+              <div id="governanceAlerts" class="alert-list"></div>
+              <div id="governanceError" class="error-state hidden">
+                <p class="error-text">데이터를 불러올 수 없습니다.</p>
+                <button type="button" class="retry-btn" id="retryGovernance">재시도</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

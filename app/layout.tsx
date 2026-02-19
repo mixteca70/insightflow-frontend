@@ -29,14 +29,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){function r(){document.querySelectorAll('[style*="user-select"]').forEach(function(e){var s=e.getAttribute('style');if(s){var n=s.replace(/user-select\\s*:\\s*[^;]+;?\\s*/gi,'').trim();e.setAttribute('style',n||'')}})};r();document.readyState==='loading'&&document.addEventListener('DOMContentLoaded',r);new MutationObserver(r).observe(document.documentElement,{attributes:true,subtree:true,attributeFilter:['style']})})();`,
+          }}
+        />
         <Providers>
-          <div className="flex min-h-screen">
+          <div className="flex min-h-screen" suppressHydrationWarning>
             <Sidebar />
             <MobileNav />
-            <div className="flex flex-1 flex-col md:pl-64">
+            <div className="flex flex-1 flex-col md:pl-64" suppressHydrationWarning>
               <Header />
-              <main className="flex-1 p-6">{children}</main>
+              <main className="flex-1 p-6" suppressHydrationWarning>{children}</main>
             </div>
           </div>
           <Toaster />
