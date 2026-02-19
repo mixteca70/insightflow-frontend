@@ -32,16 +32,16 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){function r(){document.querySelectorAll('[style*="user-select"]').forEach(function(e){var s=e.getAttribute('style');if(s){var n=s.replace(/user-select\\s*:\\s*[^;]+;?\\s*/gi,'').trim();e.setAttribute('style',n||'')}})};r();document.readyState==='loading'&&document.addEventListener('DOMContentLoaded',r);new MutationObserver(r).observe(document.documentElement,{attributes:true,subtree:true,attributeFilter:['style']})})();`,
+            __html: `(function(){var r=function(){document.querySelectorAll('[style*="user-select"]').forEach(function(e){var s=e.getAttribute('style');if(s){var n=s.replace(/user-select\\s*:\\s*[^;]+;?\\s*/gi,'').trim();e.setAttribute('style',n||'')}})};r();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',r)})();`,
           }}
         />
         <Providers>
-          <div className="flex min-h-screen" suppressHydrationWarning>
+          <div className="flex min-h-screen">
             <Sidebar />
             <MobileNav />
-            <div className="flex flex-1 flex-col md:pl-64" suppressHydrationWarning>
+            <div className="flex flex-1 flex-col md:pl-64">
               <Header />
-              <main className="flex-1 p-6" suppressHydrationWarning>{children}</main>
+              <main className="flex-1 p-6">{children}</main>
             </div>
           </div>
           <Toaster />
